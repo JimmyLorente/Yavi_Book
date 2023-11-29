@@ -16,7 +16,15 @@ export class FormularioComponent implements OnInit{
     sections: '',
     imgUrl: '',
   }
-  editar
+  editarLibros = {
+    name: '',
+    description: '',
+    date: '',
+    publishing_book: '',
+    sections: '',
+    imgUrl: '',
+  }
+  
   ngOnInit(): void {
       
   }
