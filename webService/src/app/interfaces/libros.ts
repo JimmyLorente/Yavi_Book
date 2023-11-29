@@ -1,4 +1,4 @@
-export interface libros{
+export interface Libros{
     id: string;
     name: string;
     date: string;

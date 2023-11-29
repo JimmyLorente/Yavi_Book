@@ -2,18 +2,17 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { LOGIN_URL, REGISTER_URL, USERS_URL } from '../constants/url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceClientesService {
 
-  servidor="http://localhost:3200";
-
   constructor(private servicio:HttpClient) { }
 
   ConsultarClientes(): Observable<any>{
-      return this.servicio.get(` ${this.servidor}/usuarios/users`,).pipe(
+      return this.servicio.get(USERS_URL,).pipe(
         catchError(error => {
           console.error("Error", error);
           throw error;
@@ -21,13 +20,13 @@ export class ServiceClientesService {
       )
   }
   register(usuario: any): Observable<any> {
-    return this.servicio.post(`${this.servidor}/usuarios/register`, usuario).pipe(
+    return this.servicio.post(REGISTER_URL, usuario).pipe(
       catchError(this.handleErrors)
     );
   }
 
   login(usuario: any): Observable<any> {
-    return this.servicio.post(`${this.servidor}/usuarios/login`, usuario).pipe(
+    return this.servicio.post(LOGIN_URL, usuario).pipe(
       catchError(this.handleErrors)
     );
   }

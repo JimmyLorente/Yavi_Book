@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Clientes } from 'src/app/interfaces/clientes';
-import { ServiceClientesService } from 'src/app/servicio/service-clientes.service';
+import { ServiceClientesService } from 'src/app/services/service-clientes.service';
 
 @Component({
   selector: 'app-listar',
