@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServiceClientesService } from 'src/app/services/service-clientes.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   usuarioLogin = {
     email: '',
-    password: ''
+    password: '',
   };
-
+  ngOnInit(): void {}
   constructor(private serviceClients: ServiceClientesService) {}
 
   iniciarSesion() {
