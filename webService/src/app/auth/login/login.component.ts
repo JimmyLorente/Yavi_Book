@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServiceClientesService } from 'src/app/services/service-clientes.service';
 
 @Component({
@@ -12,8 +12,14 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   };
+ gOnInit(): void {
+
+  }
 
   constructor(private serviceClients: ServiceClientesService) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   iniciarSesion() {
     this.serviceClients.login(this.usuarioLogin).subscribe(

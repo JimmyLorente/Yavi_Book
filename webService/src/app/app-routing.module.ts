@@ -4,7 +4,7 @@ import { ListarComponent } from './pages/listar/listar.component';
 
 const routes: Routes = [
   {
-    path: 'yavifood',
+    path: 'yavibook',
     children: [{ path: 'clientes', component: ListarComponent }],
   },
 ];
