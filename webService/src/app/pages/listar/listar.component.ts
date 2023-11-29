@@ -9,15 +9,8 @@ import { ServiceClientesService } from 'src/app/services/service-clientes.servic
 })
 export class ListarComponent implements OnInit {
   datosClientes: Clientes[] = [];
-  usuarioRegistro = {
-    name: '',
-    email: '',
-    password: '',
-  };
-  usuarioLogin = {
-    email: '',
-    password: ''
-  };
+
+
 
   constructor(private serviceClients: ServiceClientesService) {}
 
@@ -35,28 +28,6 @@ export class ListarComponent implements OnInit {
     );
   }
 
-  registrarUsuario() {
-    this.serviceClients.register(this.usuarioRegistro).subscribe(
-      (response) => {
-        console.log('Registro exitoso', response);
-        // Manejar el éxito según tus necesidades (por ejemplo, redirección)
-      },
-      (error) => {
-        console.error('Error en el registro', error);
-        // Manejar el error según tus necesidades
-      }
-    );
-  }
-  iniciarSesion() {
-    this.serviceClients.login(this.usuarioLogin).subscribe(
-      (response) => {
-        console.log('Inicio de sesión exitoso', response);
-        // Manejar el éxito según tus necesidades (por ejemplo, redirección)
-      },
-      (error) => {
-        console.error('Error en el inicio de sesión', error);
-        // Manejar el error según tus necesidades
-      }
-    );
-  }
+
+
 }

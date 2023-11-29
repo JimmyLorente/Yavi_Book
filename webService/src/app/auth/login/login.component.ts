@@ -4,18 +4,13 @@ import { ServiceClientesService } from 'src/app/services/service-clientes.servic
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   usuarioLogin = {
     email: '',
-    password: ''
+    password: '',
   };
- gOnInit(): void {
-
-  }
-
   constructor(private serviceClients: ServiceClientesService) {}
   ngOnInit(): void {
     throw new Error('Method not implemented.');

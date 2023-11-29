@@ -24,9 +24,9 @@ export class FormularioComponent implements OnInit{
     sections: '',
     imgUrl: '',
   }
-  
+
   ngOnInit(): void {
-      
+    
   }
 
 
