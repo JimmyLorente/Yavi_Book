@@ -6,6 +6,7 @@ export const usuarios: any[] = [
     password: bcrypt.hashSync("12345", 10),
     roles: ["administrador"],
   },
+  
 ];
 
 export const books: any[] = [
