@@ -98,35 +98,6 @@ router.delete(
   })
 );
 
-//actualizar usuario por id
-router.put(
-  "/:userId",
-  auth,
-  handler(async (req, res) => {
-    const updateUser = req.body;
-    const userId = req.params.userId;
-    const result = await UserModel.findByIdAndUpdate(userId, updateUser, {
-      new: true,
-    });
-    res.send(result);
-  })
-);
-
-//actualizar usuario perfil
-router.put(
-  "/updateProfile",
-  auth,
-  handler(async (req, res) => {
-    const { name, apellido, email, dateOfBirth, perfilIMG } = req.body;
-    const user = await UserModel.findByIdAndUpdate(
-      req.user.id,
-      { name, apellido, email, dateOfBirth, perfilIMG },
-      { new: true }
-    );
-    res.send(generateTokenResponse(user));
-  })
-);
-
 //cambiar contraseña
 router.put(
   "/changePassword",
@@ -147,6 +118,36 @@ router.put(
     user.password = await bcrypt.hash(newPassword, PASSWORD_HASH_SALT_ROUNDS);
     await user.save();
     res.send("¡Contraseña actualizada!");
+  })
+);
+//actualizar usuario perfil
+router.put(
+  "/updateProfile",
+  auth,
+  handler(async (req, res) => {
+    const { name, apellido, email, dateOfBirth, perfilIMG } = req.body;
+    const user = await UserModel.findByIdAndUpdate(
+      req.user.id,
+      { name, apellido, email, dateOfBirth, perfilIMG },
+      { new: true }
+    );
+    res.send(generateTokenResponse(user));
+  })
+);
+
+
+
+//actualizar usuario por id
+router.put(
+  "/:userId",
+  auth,
+  handler(async (req, res) => {
+    const updateUser = req.body;
+    const userId = req.params.userId;
+    const result = await UserModel.findByIdAndUpdate(userId, updateUser, {
+      new: true,
+    });
+    res.send(result);
   })
 );
 
@@ -176,7 +177,7 @@ const generateTokenResponse = (user) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1h",
+      expiresIn: "7h",
     }
   );
 
@@ -186,6 +187,7 @@ const generateTokenResponse = (user) => {
     name: user.name,
     apellido: user.apellido,
     isAdmin: user.isAdmin,
+    perfilIMG: user.perfilIMG, // Asegúrate de incluir perfilIMG en la respuesta
     token,
   };
 };

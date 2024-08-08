@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../input/input";
 import Title from "../Title/Title";
@@ -14,48 +14,55 @@ export default function ChangePassword() {
     } = useForm();
 
     const { changePassword } = useAuth();
-    const submit = (passwords) => {
-        changePassword(passwords);
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const submit = async (passwords) => {
+        try {
+            await changePassword(passwords);
+            setErrorMessage(""); // Clear any previous error message
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(submit)}>
-            <Title title="Cambiar Contraseña" />
-                <Input
-                    type="password"
-                    label="Contraseña Actual"
-                    {...register("currentPassword", {
-                        required: true,
-                    })}
-                    error={errors.currentPassword}
-                />
-
-                <Input
-                    type="password"
-                    label="Nueva Contraseña"
-                    {...register("newPassword", {
-                        required: true,
-                        minLength: 5,
-                    })}
-                    error={errors.newPassword}
-                />
-
-                <Input
-                    type="password"
-                    label="Confirmar Nueva Contraseña"
-                    {...register("confirmNewPassword", {
-                        required: true,
-                        validate: (value) =>
-                            value !== getValues("newPassword")
-                                ? "Las contraseñas no coinciden"
-                                : true,
-                    })}
-                    error={errors.confirmNewPassword}
-                />
-
-                <Button type="submit" text="Cambiar" />
-            </form>
+        <div className="">
+            <div className="w-full  bg-white p-8 rounded-lg shadow-md">
+                <form onSubmit={handleSubmit(submit)}>
+                    <Title title="Cambiar contraseña" />
+                    {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                    <Input
+                        type="password"
+                        label="Contraseña Actual"
+                        {...register("currentPassword", {
+                            required: true,
+                        })}
+                        error={errors.currentPassword}
+                    />
+                    <Input
+                        type="password"
+                        label="Nueva Contraseña"
+                        {...register("newPassword", {
+                            required: true,
+                            minLength: 5,
+                        })}
+                        error={errors.newPassword}
+                    />
+                    <Input
+                        type="password"
+                        label="Confirmar Nueva Contraseña"
+                        {...register("confirmNewPassword", {
+                            required: true,
+                            validate: (value) =>
+                                value !== getValues("newPassword")
+                                    ? "Las contraseñas no coinciden"
+                                    : true,
+                        })}
+                        error={errors.confirmNewPassword}
+                    />
+                    <Button type="submit" text="Cambiar" />
+                </form>
+            </div>
         </div>
     );
 }

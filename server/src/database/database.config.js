@@ -1,4 +1,4 @@
-import { connect, set } from "mongoose";
+import mongoose, { connect, set } from "mongoose";
 import { UserModel } from "../interfaces/user.model.js";
 import { BookModel } from "../interfaces/book.model.js";
 import { data_biblioteca } from "../data.js";
